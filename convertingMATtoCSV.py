@@ -4,7 +4,8 @@ from os import listdir
 from os.path import isfile, join
 import pandas as pd
 
-
+#dictionary format:
+#['<subjectID>']: [sex, age, FSIQ, Neuroticism, Extraversion, Openness, Agreeableness, Conscientiousness]
 def getData(path):
 	files = [f for f in listdir(path+'/smallgraphs') if isfile(join(path+'/smallgraphs', f))]
 	print(len(files))
@@ -31,7 +32,7 @@ def getData(path):
 	return dictionary
 
 
-
+#example for how to get the data
 dataDict = getData('/Users/cranme/Documents/CSE575/brainnetworks/')
 
 for d in dataDict:
