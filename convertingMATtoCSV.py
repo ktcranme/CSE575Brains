@@ -8,7 +8,7 @@ import pandas as pd
 #['<subjectID>']: [sex, age, FSIQ, Neuroticism, Extraversion, Openness, Agreeableness, Conscientiousness]
 def getData(path):
 	files = [f for f in listdir(path+'/smallgraphs') if isfile(join(path+'/smallgraphs', f))]
-	print(len(files))
+	
 	dictionary = {}
 
 	xls = pd.ExcelFile(path+"/metainfo.xls")
@@ -33,7 +33,4 @@ def getData(path):
 
 
 #example for how to get the data
-dataDict = getData('/Users/cranme/Documents/CSE575/brainnetworks/')
-
-for d in dataDict:
-	print(dataDict[d][-1])
+#dataDict = getData('brainnetworks/')
