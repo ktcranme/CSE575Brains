@@ -16,21 +16,27 @@ def getData(path):
 	sheetX = xls.parse(0) #2 is the sheet number
 	sheetX = xls.parse(0).values
 	fileIndex = -1
-	for row in sheetX:
-		for i in range(len(files)):
-			if files[i][:9] == row[0]:
-				fileIndex = i
+	for file in files:
+		for i in range(len(sheetX)):
+			if file[:9] == sheetX[i][0]:
+				rowIndex = i
+				break
 
-		data = scipy.io.loadmat(path+'/smallgraphs/'+files[fileIndex])
+		data = scipy.io.loadmat(path+'/smallgraphs/'+file)
 		a = data['fibergraph'].toarray()
 		for i in range(70):
 		    for j in range(i, 70):
 		        a[j][i] = a[i][j]
 
-		dictionary[row[0]] = [row[2], row[3], row[5], row[7], row[8], row[9], row[10], row[11], a]
+		dictionary[file[:9]] = [sheetX[i][2], sheetX[i][3], sheetX[i][5], sheetX[i][7], sheetX[i][8], sheetX[i][9], sheetX[i][10], sheetX[i][11], a]
 
 	return dictionary
 
 
 #example for how to get the data
-#dataDict = getData('brainnetworks/')
+dataDict = getData('brainnetworks/')
+
+path = 'brainnetworks/'
+files = [f for f in listdir(path+'/smallgraphs') if isfile(join(path+'/smallgraphs', f))]
+
+
