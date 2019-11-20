@@ -29,7 +29,7 @@ def removeNewCSVs():
 	os.remove('csv/PR.csv')
 	os.remove('csv/all.csv')
 
-def writeRowToCSV(subjectID, G, EBC, NBC, C, PR):
+def writeRowToCSV(subjectID, G, EBC, NBC, C, PR, x):
 	bigRow=subjectID + ','
 
 	#EBC writing, need to handle cases for edges that may exist
@@ -80,9 +80,20 @@ def writeRowToCSV(subjectID, G, EBC, NBC, C, PR):
 	with open('csv/PR.csv', 'a') as File:
 		File.write(row)
 
+	#the one that we're doing outside of paper
+	#right now its second order centrality
+	row=subjectID + ','
+	for i in range(len(x)):
+		row += str(x[i]) + ','
+		bigRow += str(x[i]) + ','
+	row = row[:-1] + '\n'
+	with open('csv/SOC.csv', 'a') as File:
+		File.write(row)
+
 	bigRow = bigRow[:-1] + '\n'
 	with open('csv/all.csv', 'a') as File:
 		File.write(bigRow)
+
 
 
 removeNewCSVs()
@@ -95,6 +106,7 @@ for subject in dataDict:
 	#COM = nx.communicability(G)	
 	C = nx.clustering(G)
 	PR = nx.pagerank(G)
+	x = nx.second_order_centrality(G)
 
 
-	writeRowToCSV(subject, G, EBC, NBC, C, PR)
+	writeRowToCSV(subject, G, EBC, NBC, C, PR, x)
