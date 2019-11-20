@@ -39,10 +39,10 @@ def writeRowToCSV(subjectID, G, EBC, NBC, C, PR, x):
 		for j in range(i+1, 70):
 			if((i, j) in EBC):
 				row += str(EBC[(i, j)]) + ","
-				bigRow += str(EBC[(i, j)]) + ","
+				#bigRow += str(EBC[(i, j)]) + ","
 			else:
 				row += "0,"
-				bigRow += "0,"
+				#bigRow += "0,"
 	row = row[:-1] + '\n'
 	with open('csv/EBC.csv', 'a') as File:
 		File.write(row)
